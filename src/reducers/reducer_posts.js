@@ -1,4 +1,4 @@
-import FETCH_POSTS from '../actions';
+import { FETCH_POSTS } from '../actions';
 import _ from 'lodash';
 
                               //vvv Were converting the list to an object!
@@ -8,6 +8,5 @@ export default function(state = {}, action){
       return _.mapKeys(action.payload.data, 'id');
     default:
       return state;
-
   }
 }

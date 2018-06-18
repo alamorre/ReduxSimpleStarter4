@@ -10,6 +10,6 @@ export function fetchPosts(){
 
   return {
     type: FETCH_POSTS,
-    payload: request // this is the promise and middleware with resolve for us
+    payload: request
   };
 }
