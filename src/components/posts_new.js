@@ -26,7 +26,9 @@ class PostsNew extends Component{
         // if 1 then (2 and 3), else (3)
 
   onSubmit(values){
-    this.props.createPost(values);
+    this.props.createPost(values, () => {
+      this.props.history.push('/');
+    });
   }
 
   render(){
