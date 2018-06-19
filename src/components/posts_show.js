@@ -5,8 +5,10 @@ import { Link } from 'react-router-dom';
 
 class PostsShow extends Component{
   componentDidMount(){
-    const { id } =this.props.match.params; // id from url
-    this.props.fetchPost(id);
+    if(!this.props.post){ // Caching
+      const { id } =this.props.match.params; // id from url
+      this.props.fetchPost(id);
+    }
   }
 
   render(){
