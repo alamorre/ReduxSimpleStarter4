@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { createPost } from '../actions';
 
 class PostsNew extends Component{
   renderField(field){ // field contains some event-handlers
@@ -20,11 +22,11 @@ class PostsNew extends Component{
       </div>
     );
   }
-        //    1                     2            3
+        //    1              2         3
         // if 1 then (2 and 3), else (3)
 
   onSubmit(values){
-    console.log(values)
+    this.props.createPost(values);
   }
 
   render(){
@@ -40,8 +42,8 @@ class PostsNew extends Component{
           component={this.renderField} // Needed JSX
         />
         <Field
-          label = "Catagories" // key and val both can be anything
-          name="catagories"
+          label = "Categories" // key and val both can be anything
+          name="categories"
           component={this.renderField}
         />
         <Field
@@ -57,15 +59,15 @@ class PostsNew extends Component{
 }
 
 function validate(values){
-  // console.log(values) -> {title: 'Title x', catagories: "y", content: "z"}
+  // console.log(values) -> {title: 'Title x', categories: "y", content: "z"}
   const errors = {}
 
   // Validate input from values
   if(!values.title){
     errors.title = "Enter a title"; // tied to name
   }
-  if(!values.catagories){
-    errors.catagories = "Enter a catagory or two";
+  if(!values.categories){
+    errors.categories = "Enter a catagory or two";
   }
   if(!values.content){
     errors.content = "Enter some content";
@@ -78,4 +80,6 @@ function validate(values){
 export default reduxForm({
   validate, // key and value are the same
   form: 'PostsNewForm' // This has to be a unique name and name does not matter
-})(PostsNew);
+})(
+  connect(null, { createPost })(PostsNew)
+);
